@@ -3,6 +3,7 @@ import { z } from "zod";
 
 import { createSupabaseRouteHandlerClient } from "@/lib/supabase/server";
 
+const validSteps = ["profilo", "competenze", "preferenze"] as const;
 const payloadSchema = z.object({
   responses: z.record(z.any())
 });
@@ -15,6 +16,9 @@ export async function GET(request: Request, { params }: { params: { step: string
 
   if (!session) {
     return NextResponse.json({ error: "Non autenticato" }, { status: 401 });
+  }
+  if (!validSteps.includes(params.step as any)) {
+    return NextResponse.json({ error: "Step non valido" }, { status: 400 });
   }
 
   const { data, error } = await supabase
@@ -40,7 +44,9 @@ export async function POST(request: Request, { params }: { params: { step: strin
   if (!session) {
     return NextResponse.json({ error: "Non autenticato" }, { status: 401 });
   }
-
+  if (!validSteps.includes(params.step as any)) {
+    return NextResponse.json({ error: "Step non valido" }, { status: 400 });
+  }
   const json = await request.json().catch(() => null);
   const parsed = payloadSchema.safeParse(json);
 
@@ -54,7 +60,8 @@ export async function POST(request: Request, { params }: { params: { step: strin
       {
         profile_id: session.user.id,
         step: params.step,
-        responses: parsed.data.responses
+        responses: parsed.data.responses,
+        updated_at: new Date().toISOString()
       },
       {
         onConflict: "profile_id,step"

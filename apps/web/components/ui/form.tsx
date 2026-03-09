@@ -74,7 +74,7 @@ FormDescription.displayName = "FormDescription";
 
 const FormMessage = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLParagraphElement>>(({ className, children, ...props }, ref) => {
   const { formMessageId } = useFormField();
-  const body = children ?? props.children;
+  const body = children;
 
   return (
     <p ref={ref} id={formMessageId} className={cn("text-xs font-medium text-destructive", className)} {...props}>

@@ -103,9 +103,9 @@ export default function LoginPage() {
         </CardContent>
         <CardFooter className="flex flex-col items-start gap-2 text-sm text-muted-foreground">
           <p>
-            Non hai un account? Crea un profilo direttamente dal portale amministrativo Supabase o implementa una
-            registrazione personalizzata.
+            Non hai un account?
           </p>
+          <Link href="/register">Crea un account</Link>
           <Link href="/">Torna alla landing</Link>
         </CardFooter>
       </Card>
