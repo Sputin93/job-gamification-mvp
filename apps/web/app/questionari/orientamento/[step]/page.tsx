@@ -424,12 +424,6 @@ export default function OrientationWizardPage() {
                     </div>
 
                     <div className="flex items-center gap-2">
-                      {stepKey === "step-3" ? (
-                        <Button type="button" variant="outline" onClick={() => go("fine")}>
-                          Vai alla conclusione →
-                        </Button>
-                      ) : null}
-
                       <Button type="submit" disabled={isPending}>
                         {isPending ? "Salvataggio..." : "Salva e continua"}
                       </Button>
