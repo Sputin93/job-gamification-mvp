@@ -11,7 +11,7 @@ const signupSchema = z.object({
 });
 
 export async function POST(request: Request) {
-  const supabase = createSupabaseRouteHandlerClient();
+  const supabase = await createSupabaseRouteHandlerClient();
 
   const body = await request.json().catch(() => null);
   const parsed = signupSchema.safeParse(body);

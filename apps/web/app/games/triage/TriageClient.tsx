@@ -5,12 +5,8 @@ import { useRouter } from "next/navigation";
 
 import { getSupabaseBrowserClient } from "@/lib/supabase/client";
 import { startGameSession, logGameEvent, finalizeRun } from "@/lib/games/telemetry";
-import {
-  getTriageItems,
-  type Bucket,
-  type RoleContext,
-  type TriageItem,
-} from "./triage.logic";
+import { getTriageItems, type Bucket, type TriageItem } from "./triage.logic";
+import type { RoleContext } from "@/lib/games/types";
 
 type Phase = "loading" | "intro" | "playing" | "done" | "error";
 

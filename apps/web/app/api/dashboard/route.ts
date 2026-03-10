@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 import { createSupabaseRouteHandlerClient } from "@/lib/supabase/server";
 
 export async function GET() {
-  const supabase = createSupabaseRouteHandlerClient();
+  const supabase = await createSupabaseRouteHandlerClient();
   const {
     data: { session }
   } = await supabase.auth.getSession();

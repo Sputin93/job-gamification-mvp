@@ -1,7 +1,7 @@
 // apps/web/app/games/triage/triage.logic.ts
 
 export type Bucket = "urgent" | "today" | "week";
-export type RoleContext = "developer" | "sales" | "receptionist";
+import type { RoleContext } from "@/lib/games/types";
 
 export type TriageItem = {
   id: string;
@@ -56,7 +56,7 @@ const developerItems: TriageItem[] = [
   },
 ];
 
-const salesItems: TriageItem[] = [
+const salesOpsItems: TriageItem[] = [
   {
     id: "s1",
     text: "Un cliente segnala che non riesce a finalizzare un ordine già avviato.",
@@ -150,7 +150,7 @@ const receptionistItems: TriageItem[] = [
 
 export const TRIAGE_ITEMS_BY_ROLE: Record<RoleContext, TriageItem[]> = {
   developer: developerItems,
-  sales: salesItems,
+  sales_ops: salesOpsItems,
   receptionist: receptionistItems,
 };
 
@@ -164,6 +164,6 @@ export function shuffleItems<T>(arr: T[]): T[] {
 }
 
 export function getTriageItems(roleContext: RoleContext, shuffle = false): TriageItem[] {
-  const items = TRIAGE_ITEMS_BY_ROLE[roleContext] ?? TRIAGE_ITEMS_BY_ROLE.sales;
+  const items = TRIAGE_ITEMS_BY_ROLE[roleContext] ?? TRIAGE_ITEMS_BY_ROLE.sales_ops;
   return shuffle ? shuffleItems(items) : [...items];
 }

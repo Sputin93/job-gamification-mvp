@@ -4,7 +4,7 @@ import { createSupabaseServerComponentClient } from "@/lib/supabase/server";
 type GameId = "triage" | "gonogo" | "negotiation";
 
 export async function requireResearchConsent() {
-  const supabase = createSupabaseServerComponentClient();
+  const supabase = await createSupabaseServerComponentClient();
 
   const {
     data: { session },

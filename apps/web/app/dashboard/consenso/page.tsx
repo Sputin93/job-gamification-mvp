@@ -4,7 +4,7 @@ import { createSupabaseServerComponentClient } from "@/lib/supabase/server";
 import ConsentClient from "./consent-client";
 
 export default async function DashboardConsentPage() {
-  const supabase = createSupabaseServerComponentClient();
+  const supabase = await createSupabaseServerComponentClient();
 
   const {
     data: { session },

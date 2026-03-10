@@ -34,7 +34,7 @@ function score100(value: unknown) {
 }
 
 export default async function DashboardResultsPage() {
-  const supabase = createSupabaseServerComponentClient();
+  const supabase = await createSupabaseServerComponentClient();
 
   const {
     data: { session },

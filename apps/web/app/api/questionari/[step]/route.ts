@@ -9,7 +9,7 @@ const payloadSchema = z.object({
 });
 
 export async function GET(request: Request, { params }: { params: { step: string } }) {
-  const supabase = createSupabaseRouteHandlerClient();
+  const supabase =  await createSupabaseRouteHandlerClient();
   const {
     data: { session }
   } = await supabase.auth.getSession();
@@ -36,7 +36,7 @@ export async function GET(request: Request, { params }: { params: { step: string
 }
 
 export async function POST(request: Request, { params }: { params: { step: string } }) {
-  const supabase = createSupabaseRouteHandlerClient();
+  const supabase = await createSupabaseRouteHandlerClient();
   const {
     data: { session }
   } = await supabase.auth.getSession();

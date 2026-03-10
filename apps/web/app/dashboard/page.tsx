@@ -30,7 +30,7 @@ function stepBadge(done: boolean, locked?: boolean) {
 }
 
 export default async function DashboardPage() {
-  const supabase = createSupabaseServerComponentClient();
+  const supabase = await createSupabaseServerComponentClient();
   const {
     data: { session },
   } = await supabase.auth.getSession();

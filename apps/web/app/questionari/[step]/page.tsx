@@ -198,7 +198,7 @@ const stepConfigs: Record<StepKey, StepConfig> = {
           { label: "Vendite / relazione commerciale", value: "sales_ops" },
           { label: "Accoglienza / front office", value: "receptionist" }
         ]
-      }
+      },
       {
         name: "job_satisfaction",
         label: "Quanto sei soddisfatto/a della tua situazione lavorativa attuale?",
@@ -385,7 +385,10 @@ export default function QuestionarioStepPage() {
         {}
       );
 
-      const { target_role, ...backgroundPayload } = mergedResponses;
+      const target_role =
+        typeof mergedResponses.target_role === "string" ? mergedResponses.target_role : null;
+
+      const { target_role: _ignoredTargetRole, ...backgroundPayload } = mergedResponses;
 
       const { error: backgroundError } = await supabase
         .from("user_background")

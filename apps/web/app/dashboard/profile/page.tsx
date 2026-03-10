@@ -33,7 +33,7 @@ function labelValue(value: string | null | undefined, map?: Record<string, strin
 }
 
 export default async function DashboardProfilePage() {
-  const supabase = createSupabaseServerComponentClient();
+  const supabase = await createSupabaseServerComponentClient();
 
   const {
     data: { session },

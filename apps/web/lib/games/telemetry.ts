@@ -1,10 +1,9 @@
 // apps/web/lib/games/telemetry.ts
 import type { SupabaseClient } from "@supabase/supabase-js";
 
-type RoleContext = "developer" | "receptionist" | "sales_ops";
+import type { RoleContext, GameId } from "@/lib/games/types";
 
 // ✅ rinominato planning -> gonogo
-export type GameId = "triage" | "negotiation" | "gonogo";
 
 export type EventType =
   | "session"
