@@ -36,9 +36,9 @@ export const ORIENTATION_ITEMS: OrientationItem[] = [
 
   // D5 Iniziativa (20 e 22 invertiti)
   { id:"D5_1", dim:"D5", text:"Se noto un problema, tendo ad agire anche senza che mi venga chiesto." },
-  { id:"D5_2", dim:"D5", text:"Aspetto indicazioni prima di intraprendere un’azione.", reversed:true },
-  { id:"D5_3", dim:"D5", text:"Mi capita spesso di anticipare ciò che potrebbe essere necessario fare." },
-  { id:"D5_4", dim:"D5", text:"Mi attivo soprattutto quando qualcuno mi assegna un compito preciso.", reversed:true },
+  { id:"D5_2", dim:"D5", text:"Mi attivo soprattutto quando qualcuno mi assegna un compito preciso.", reversed:true },
+  { id:"D5_3", dim:"D5", text:"Mi capita di prepararmi in anticipo per situazioni che potrebbero verificarsi." },
+  { id:"D5_4", dim:"D5", text:"Aspetto indicazioni prima di intraprendere un’azione.", reversed:true },
 
   // D6a Apprendimento
   { id:"D6a_1", dim:"D6a", text:"Mi sento soddisfatto quando riesco a migliorare le mie capacità." },

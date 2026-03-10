@@ -298,7 +298,7 @@ export default function TriageClient() {
 
         <div className="grid gap-3 md:grid-cols-3">
           <button
-            className="border rounded px-4 py-3 text-sm hover:bg-gray-50 transition disabled:opacity-50"
+            className="rounded border border-border bg-background px-4 py-3 text-sm text-foreground transition hover:bg-muted active:bg-muted/80 disabled:opacity-50"
             onClick={() => choose("urgent")}
             disabled={busy}
           >
@@ -306,7 +306,7 @@ export default function TriageClient() {
           </button>
 
           <button
-            className="border rounded px-4 py-3 text-sm hover:bg-gray-50 transition disabled:opacity-50"
+            className="rounded border border-border bg-background px-4 py-3 text-sm text-foreground transition hover:bg-muted active:bg-muted/80 disabled:opacity-50"
             onClick={() => choose("today")}
             disabled={busy}
           >
@@ -314,7 +314,7 @@ export default function TriageClient() {
           </button>
 
           <button
-            className="border rounded px-4 py-3 text-sm hover:bg-gray-50 transition disabled:opacity-50"
+            className="rounded border border-border bg-background px-4 py-3 text-sm text-foreground transition hover:bg-muted active:bg-muted/80 disabled:opacity-50"
             onClick={() => choose("week")}
             disabled={busy}
           >

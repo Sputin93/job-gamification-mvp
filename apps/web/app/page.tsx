@@ -10,7 +10,7 @@ export default function HomePage() {
       <div className="mx-auto w-full max-w-3xl">
         <Card className="bg-white/10 backdrop-blur">
           <CardHeader>
-            <CardTitle className="text-3xl font-bold text white">Job Gamification MVP</CardTitle>
+            <CardTitle className="text-3xl font-bold text-slate-200">Job Gamification MVP</CardTitle>
             <CardDescription className="text-slate-200">
               Una piattaforma che guida i talenti attraverso questionari dinamici e restituisce offerte di
               lavoro personalizzate.
