@@ -202,38 +202,40 @@ useEffect(() => {
   finalize();
 }, [phase]);
 
-// 🔵 Key press handler (log evento coerente con telemetry)
+async function registerResponse() {
+  if (phase !== "stimulus") return;
+  if (!trials[idx] || !sessionId || !profileId) return;
+  if (respondedRef.current) return;
+  if (trialLoggedRef.current) return;
+
+  respondedRef.current = true;
+  trialLoggedRef.current = true;
+
+  const trial = trials[idx];
+  const rt = performance.now() - stimulusStartRef.current;
+
+  const correct = trial.stimulusType === "go";
+
+  await logGameEvent({
+    supabase,
+    sessionId,
+    profileId,
+    eventType: "gonogo",
+    eventName: "user_action",
+    payload: {
+      trial: idx + 1,
+      stimulus_type: trial.stimulusType,
+      responded: true,
+      rt_ms: Math.round(rt),
+      correct,
+    },
+  });
+}
+
+// 🔵 Key press handler desktop
 useEffect(() => {
-  const handleKey = async (e: KeyboardEvent) => {
-    if (phase !== "stimulus") return;
-    if (!trials[idx] || !sessionId || !profileId) return;
-    if (respondedRef.current) return  // 🔵 evita doppia risposta
-    if (trialLoggedRef.current) return;
-
-    respondedRef.current = true;
-    trialLoggedRef.current = true;
-
-    const trial = trials[idx];
-    const rt = performance.now() - stimulusStartRef.current;
-
-    const correct =
-      trial.stimulusType === "go"; // premere su GO = corretto
-
-    // 🔵 log evento strutturato
-    await logGameEvent({
-      supabase,
-      sessionId,
-      profileId,
-      eventType: "gonogo",
-      eventName: "user_action",
-      payload: {
-        trial: idx + 1,
-        stimulus_type: trial.stimulusType,
-        responded: true,
-        rt_ms: Math.round(rt),
-        correct,
-      },
-    });
+  const handleKey = async (_e: KeyboardEvent) => {
+    await registerResponse();
   };
 
   window.addEventListener("keydown", handleKey);
@@ -264,8 +266,8 @@ useEffect(() => {
         </p>
 
         <ul className="list-disc pl-5 text-sm text-muted-foreground space-y-1">
-          <li>Premi un tasto quando vedi il <strong>cerchio pieno</strong>.</li>
-          <li>Non premere nulla quando vedi la <strong>X</strong>.</li>
+          <li>Premi un tasto oppure tocca lo schermo quando vedi il <strong>cerchio pieno</strong>.</li>
+          <li>Non premere nulla e non toccare lo schermo quando vedi la <strong>X</strong>.</li>
         </ul>
 
         <p className="text-sm text-muted-foreground">
@@ -303,10 +305,16 @@ useEffect(() => {
   const current = trials[idx]
 
   return (
-    <div className="flex items-center justify-center h-screen text-6xl">
-      {phase === 'fixation' && '+'}
-      {phase === 'stimulus' && current?.stimulusLabel}
-      {phase === 'iti' && ''}
+    <div className="min-h-screen flex items-center justify-center p-4 bg-background">
+      <div
+        className="w-full max-w-md min-h-[320px] rounded-2xl border bg-card shadow-sm flex items-center justify-center text-6xl font-bold select-none"
+        style={{ touchAction: "manipulation", userSelect: "none" }}
+        onPointerDown={phase === "stimulus" ? () => void registerResponse() : undefined}
+      >
+        {phase === "fixation" && "+"}
+        {phase === "stimulus" && current?.stimulusLabel}
+        {phase === "iti" && ""}
+      </div>
     </div>
-  )
+  );
 }
