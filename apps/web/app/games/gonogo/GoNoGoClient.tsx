@@ -254,14 +254,24 @@ useEffect(() => {
     )
   }
 
-  if (phase === 'intro') {
+  if (phase === "intro") {
     return (
-      <div className="p-8 space-y-4">
+      <div className="p-8 space-y-4 max-w-xl mx-auto">
         <h1 className="text-2xl font-bold">Go / No-Go Test</h1>
-        <p>
-          Premi un tasto quando vedi il cerchio pieno.
-          Non premere nulla quando vedi la X.
+
+        <p className="text-sm text-muted-foreground">
+          Durante questo test vedrai apparire rapidamente dei simboli al centro dello schermo.
         </p>
+
+        <ul className="list-disc pl-5 text-sm text-muted-foreground space-y-1">
+          <li>Premi un tasto quando vedi il <strong>cerchio pieno</strong>.</li>
+          <li>Non premere nulla quando vedi la <strong>X</strong>.</li>
+        </ul>
+
+        <p className="text-sm text-muted-foreground">
+          Il test dura circa <strong>1 minuto (60 prove)</strong>. Cerca di rispondere il più rapidamente e accuratamente possibile.
+        </p>
+
         <button
           className="px-4 py-2 bg-black text-white rounded"
           onClick={startTest}
@@ -269,7 +279,7 @@ useEffect(() => {
           Avvia test
         </button>
       </div>
-    )
+    );
   }
 
   if (phase === "done") {
