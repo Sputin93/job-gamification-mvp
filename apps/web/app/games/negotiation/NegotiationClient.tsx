@@ -224,27 +224,31 @@ export default function NegotiationClient() {
   }
 
   return (
-    <div className="p-8 max-w-3xl mx-auto space-y-6">
-      <div className="text-sm opacity-70">
-        Scenario {idx + 1} / {scenarios.length}
-      </div>
+    <div className="p-8 max-w-3xl mx-auto">
+      <div key={current?.id} className="space-y-6">
+        <div className="text-sm opacity-70">
+          Scenario {idx + 1} / {scenarios.length}
+        </div>
 
-      <h2 className="text-xl font-semibold">{current?.title}</h2>
+        <h2 className="text-xl font-semibold">{current?.title}</h2>
 
-      <p className="text-base">{current?.prompt}</p>
+        <p className="text-base">{current?.prompt}</p>
 
-      <div className="space-y-3">
-        {current?.options.map((opt) => (
-          <button
-            key={opt.id}
-            className="w-full text-left border rounded p-3 hover:bg-gray-50 transition"
-            onClick={() => choose(opt.id)}
-          >
-            <span className="font-medium mr-2">{opt.id}.</span>
-            {opt.text}
-          </button>
-        ))}
+        <div className="space-y-3">
+          {current?.options.map((opt) => (
+            <button
+              key={opt.id}
+              className="w-full rounded border border-border bg-background p-3 text-left text-foreground transition hover:bg-muted active:bg-muted/80 focus:outline-none focus:ring-2 focus:ring-ring"
+              onClick={(e) => {
+                (e.currentTarget as HTMLButtonElement).blur();
+                choose(opt.id);
+              }}
+            >
+              <span className="font-medium mr-2">{opt.id}.</span>
+              {opt.text}
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   );
-}
